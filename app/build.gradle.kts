@@ -6,12 +6,12 @@ plugins {
 
 android {
     namespace = "com.example.pkm_2"
-    compileSdk = 36   // ❗ FIX: remove broken "release(36)" line
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.example.pkm_2"
         minSdk = 24
-        targetSdk = 36  // ✔ stable version
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0"
 
@@ -34,6 +34,10 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    buildFeatures {
+        dataBinding = true
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -44,11 +48,11 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
 
     // Retrofit for API calls
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
 
     // OkHttp for logging
-    implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
+    implementation(libs.logging.interceptor)
 
     // Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
@@ -75,4 +79,3 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }
-

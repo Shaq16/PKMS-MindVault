@@ -1,4 +1,3 @@
-// File: app/src/main/java/com/yourapp/MainActivity.kt
 package com.example.pkm_2
 
 import android.os.Bundle
@@ -8,14 +7,20 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.pkm_2.databinding.ActivityMainBinding
+import com.example.pkm_2.repository.LangflowRepository
+import com.example.pkm_2.viewmodel.MainUiState
 import com.example.pkm_2.viewmodel.MainViewModel
-import com.example.pkm_2.viewmodel.UiState
+import com.example.pkm_2.viewmodel.MainViewModelFactory
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private val viewModel: MainViewModel by viewModels()
+
+    private val repository by lazy { LangflowRepository() }
+    private val viewModel: MainViewModel by viewModels {
+        MainViewModelFactory(repository)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,24 +28,21 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setupListeners()
-        observeStates()
+        observeUiState()
     }
 
     private fun setupListeners() {
-        // Add Data button
         binding.btnAddData.setOnClickListener {
-            val data = binding.etDataInput.text.toString()
+            val data = binding.etDataInput.text.toString().trim()
             if (data.isNotBlank()) {
                 viewModel.ingestData(data)
-                binding.etDataInput.text?.clear()
             } else {
-                Toast.makeText(this, "Please enter data", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Please enter data to ingest", Toast.LENGTH_SHORT).show()
             }
         }
 
-        // Query button
         binding.btnQuery.setOnClickListener {
-            val question = binding.etQueryInput.text.toString()
+            val question = binding.etQueryInput.text.toString().trim()
             if (question.isNotBlank()) {
                 viewModel.queryData(question)
             } else {
@@ -49,62 +51,39 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun observeStates() {
-        // Observe ingest state
+    private fun observeUiState() {
         lifecycleScope.launch {
-            viewModel.ingestState.collect { state ->
+            viewModel.uiState.collect { state ->
                 when (state) {
-                    is UiState.Idle -> {
-                        binding.btnAddData.isEnabled = true
-                        binding.progressBar.visibility = View.GONE
+                    is MainUiState.Idle -> {
+                        setLoading(false)
                     }
-                    is UiState.Loading -> {
-                        binding.btnAddData.isEnabled = false
-                        binding.progressBar.visibility = View.VISIBLE
+                    is MainUiState.Loading -> {
+                        setLoading(true)
                     }
-                    is UiState.Success -> {
-                        binding.btnAddData.isEnabled = true
-                        binding.progressBar.visibility = View.GONE
-                        Toast.makeText(this@MainActivity, state.data, Toast.LENGTH_SHORT).show()
+                    is MainUiState.Success -> {
+                        setLoading(false)
+                        binding.tvAnswer.text = state.message
+                        Toast.makeText(this@MainActivity, state.message, Toast.LENGTH_SHORT).show()
+                        binding.etDataInput.text.clear()
+                        binding.etQueryInput.text.clear()
                     }
-                    is UiState.Error -> {
-                        binding.btnAddData.isEnabled = true
-                        binding.progressBar.visibility = View.GONE
-                        Toast.makeText(
-                            this@MainActivity,
-                            "Error: ${state.message}",
-                            Toast.LENGTH_LONG
-                        ).show()
+                    is MainUiState.Error -> {
+                        setLoading(false)
+                        binding.tvAnswer.text = "Error: ${state.message}"
+                        Toast.makeText(this@MainActivity, "Error: ${state.message}", Toast.LENGTH_LONG).show()
                     }
                 }
             }
         }
+    }
 
-        // Observe query state
-        lifecycleScope.launch {
-            viewModel.queryState.collect { state ->
-                when (state) {
-                    is UiState.Idle -> {
-                        binding.btnQuery.isEnabled = true
-                        binding.progressBar.visibility = View.GONE
-                    }
-                    is UiState.Loading -> {
-                        binding.btnQuery.isEnabled = false
-                        binding.progressBar.visibility = View.VISIBLE
-                        binding.tvAnswer.text = "Thinking..."
-                    }
-                    is UiState.Success -> {
-                        binding.btnQuery.isEnabled = true
-                        binding.progressBar.visibility = View.GONE
-                        binding.tvAnswer.text = state.data
-                    }
-                    is UiState.Error -> {
-                        binding.btnQuery.isEnabled = true
-                        binding.progressBar.visibility = View.GONE
-                        binding.tvAnswer.text = "Error: ${state.message}"
-                    }
-                }
-            }
+    private fun setLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+        binding.btnAddData.isEnabled = !isLoading
+        binding.btnQuery.isEnabled = !isLoading
+        if (isLoading) {
+            binding.tvAnswer.text = "Thinking..."
         }
     }
 }

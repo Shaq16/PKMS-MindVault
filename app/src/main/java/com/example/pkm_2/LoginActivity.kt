@@ -33,7 +33,7 @@ class LoginActivity : AppCompatActivity() {
             val pass = passwordInput.text.toString()
 
             if (email == "admin@mindvault.com" && pass == "mind123") {
-                startActivity(Intent(this, HomeActivity::class.java))
+                startActivity(Intent(this, MainActivity::class.java))
                 finish()
             } else {
                 Toast.makeText(this, "Invalid credentials", Toast.LENGTH_SHORT).show()

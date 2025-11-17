@@ -28,3 +28,4 @@ class CaptureActivity : AppCompatActivity() {
         }
     }
 }
+// Added a comment to force re-analysis
