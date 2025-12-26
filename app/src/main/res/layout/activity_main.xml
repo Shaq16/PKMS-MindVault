@@ -4,120 +4,58 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:background="@drawable/bg_gradient_dark"
+    android:padding="28dp">
 
-    <!-- Section: Add Data -->
     <TextView
-        android:id="@+id/tvAddDataTitle"
+        android:id="@+id/welcomeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add Data to Database"
-        android:textSize="20sp"
+        android:text="Welcome to MindVault"
+        android:textColor="#1C1C22"
         android:textStyle="bold"
-        android:textColor="@android:color/black"
+        android:textSize="28sp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"/>
 
-    <EditText
-        android:id="@+id/etDataInput"
-        android:layout_width="0dp"
+    <TextView
+        android:id="@+id/quoteText"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="Enter data to store..."
-        android:minHeight="100dp"
-        android:gravity="top|start"
-        android:inputType="textMultiLine"
-        android:padding="12dp"
-        android:background="@android:drawable/edit_text"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="#1C1C22"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:layout_marginTop="12dp"
+        app:layout_constraintTop_toBottomOf="@id/welcomeText"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvAddDataTitle" />
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <Button
-        android:id="@+id/btnAddData"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="Add Data"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etDataInput" />
-
-    <!-- Divider -->
-    <View
-        android:id="@+id/divider"
+        android:id="@+id/captureBtn"
         android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginTop="32dp"
-        android:background="@android:color/darker_gray"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnAddData" />
-
-    <!-- Section: Query Data -->
-    <TextView
-        android:id="@+id/tvQueryTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Ask Questions"
-        android:textSize="20sp"
+        android:layout_height="56dp"
+        android:text="Capture Note"
+        android:textColor="#222222"
         android:textStyle="bold"
-        android:textColor="@android:color/black"
+        android:background="#A999FF"
+        android:layout_marginTop="60dp"
+        app:layout_constraintTop_toBottomOf="@id/quoteText"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/divider" />
-
-    <EditText
-        android:id="@+id/etQueryInput"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="Ask a question..."
-        android:minHeight="48dp"
-        android:padding="12dp"
-        android:background="@android:drawable/edit_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvQueryTitle" />
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <Button
-        android:id="@+id/btnQuery"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="Ask"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etQueryInput" />
-
-    <!-- Answer Display -->
-    <ScrollView
+        android:id="@+id/queryBtn"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@id/progressBar"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="56dp"
+        android:text="Query Notes"
+        android:textColor="#222222"
+        android:textStyle="bold"
+        android:background="#A999FF"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/captureBtn"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnQuery">
-
-        <TextView
-            android:id="@+id/tvAnswer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#F5F5F5"
-            android:padding="16dp"
-            android:text="Answer will appear here..."
-            android:textColor="@android:color/black"
-            android:textSize="16sp" />
-    </ScrollView>
-
-    <!-- Progress Bar -->
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
