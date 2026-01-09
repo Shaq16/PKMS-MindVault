@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit
 object RetrofitClient {
 
 <<<<<<< HEAD
-    private const val BASE_URL = "http://localhost:7861/"  // Use your computer's IP
+    private const val BASE_URL = "http://localhost/"
     private val okHttpClient by lazy {
         OkHttpClient.Builder()
             .addInterceptor(createHeaderInterceptor())
