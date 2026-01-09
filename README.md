@@ -29,9 +29,9 @@ The website provides two main actions:
 A sample UI screenshot is shown below:
 
 <img width="1280" height="686" alt="AI Chat Assistants UI" src="https://github.com/user-attachments/assets/28732caf-cebb-4b2d-8750-b5e9a0e4c782" />
-<img width="280" height="580" alt="image" src="https://github.com/user-attachments/assets/27c6e2b6-7e4a-4d6c-b7f3-67df46333a6f" />
-<img width="280" height="580" alt="image" src="https://github.com/user-attachments/assets/cd8b2eb2-70aa-4c8a-9714-ce578957f591" />
-<img width="280" height="580" alt="image" src="https://github.com/user-attachments/assets/663f8e03-4307-4c1a-95ea-b65403a358cf" />
+<img width="240" height="580" alt="image" src="https://github.com/user-attachments/assets/27c6e2b6-7e4a-4d6c-b7f3-67df46333a6f" />
+<img width="240" height="580" alt="image" src="https://github.com/user-attachments/assets/cd8b2eb2-70aa-4c8a-9714-ce578957f591" />
+<img width="240" height="580" alt="image" src="https://github.com/user-attachments/assets/663f8e03-4307-4c1a-95ea-b65403a358cf" />
 
 ---
 
