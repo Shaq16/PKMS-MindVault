@@ -2,8 +2,6 @@
 
 MindVault is a **web-based application demo**, supported by a **basic Kotlin Android app**, that demonstrates how users can store information and interact with an AI-powered assistant through a simple interface.
 
-This project is shared for **learning and demonstration purposes only**.
-
 ---
 
 ## What we built
