@@ -19,9 +19,10 @@ class LangflowRepository {
     private val gson = Gson()
 
     // ✅ Your flow details
-    private val flowId = "711a3691-e267-4db3-8a80-d88a4cc5c6f5"
-    private val textInputId = "TextInput-lNGc3"  // For ingesting
-    private val chatInputId = "ChatInput-gNh1q"  // For querying
+private val flowId = "FLOW_ID"
+private val textInputId = "TEXT_INPUT_ID"
+private val chatInputId = "CHAT_INPUT_ID"
+
 
     /**
      * Ingest data into the database
